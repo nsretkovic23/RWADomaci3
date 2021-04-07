@@ -3,6 +3,7 @@ import {UplaceniTiketi} from './UplaceniTiketi';
 import Izvlacenje from './izvlacenje'
 import { Observable, Subject } from '../node_modules/rxjs/index';
 
+/*----------lucky six-----------*/
 
 let uplTiketi = new UplaceniTiketi();
 const tiket1 = new Tiket([5,13,25,33,42,45], "prvi tiket");
