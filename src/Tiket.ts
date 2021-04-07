@@ -20,31 +20,34 @@ export  class Tiket{
     }
 
     pratiIzvlacenje(){
-        this.kolo.subscribe({
-            next(x) {
-                console.log(`primio br ${x}`);
-            },
-            error(err){console.log("greeska")}   
-        })
+       this.kolo.subscribe((num)=>{
+           this.proveriTiket(num);
+       }, 
+       (err)=>{
+        console.log("Desila se greska");
+       },
+       ()=>{
+           if(this.jeDobitan()){
+            this.setStatus('Dobitan');
+           }else{
+            this.setStatus('Gubitan');
+           }    
+       })
     }
 
     proveriTiket(br:number){
         if(this.proveriBroj(br)){
             this.pogodjenih++;
             if(this.jeDobitan()){
-                this.setStatus('Dobitan');
+                this.setStatus(`Dobitan <----------`);
             }
             else{
-                console.log(`Pogodjen broj ${br}`);
+                console.log(`Pogodjen broj ${this.ime} ${br}, broj pogodaka ${this.pogodjenih}`);
             }
         }
     }
 
     proveriBroj(br:number):boolean{
-        //this.brojevi.forEach((el)=>{
-        //    if(el===br)
-        //        return true;
-        //})
         return this.brojevi.includes(br);
     }
 
@@ -54,12 +57,7 @@ export  class Tiket{
 
     setStatus(status:String){
         this.status = status;
-        console.log(this.status);
-    }
-
-    gubitan(){ //proba, prepravi da ima vise smisla
-        this.setStatus('Gubitan');
-        console.log(this.status); 
+        console.log(`Tiket: ${this.ime} je ${this.status}`);
     }
 
 }
